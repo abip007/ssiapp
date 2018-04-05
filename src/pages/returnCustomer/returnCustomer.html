@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar color="primary" >
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Return Customer</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<form [formGroup]="addressForm">
+  <ion-card>
+     <ion-card-content>
+       <ion-label color="primary">Billing Address</ion-label>
+     <ion-list *ngFor="let item of billto">
+       <h2>{{item.Bco}}</h2>
+        <h2>{{item.bName}}</h2>
+        <h4>{{item.bAdd1}}</h4>
+         <h4>{{item.bAdd2}}</h4>
+        <h4>{{item.bZip}} {{item.bCity}} {{item.bState}}</h4>
+        <ion-input type="text" hidden formControlName="custid" [(ngModel)]="item.Custid"></ion-input>
+     </ion-list>
+     <ion-label color="primary">Shipping Address</ion-label>
+     <ion-list *ngFor="let items of shipto">
+       <h2>{{items.Sco}}</h2>
+        <h2>{{items.sName}}</h2>
+        <h4>{{items.sAdd1}}</h4>
+         <h4>{{items.sAdd2}}</h4>
+        <h4>{{items.zipcode}} {{items.sCity}} {{items.sState}}</h4>
+        <ion-input type="text" hidden formControlName="shipid" [(ngModel)]="items.shipid"></ion-input>
+        <h2 item-right>Change</h2>
+     </ion-list>
+     <ion-list *ngFor="let pay of payinfo">
+        <ion-label color="primary">Existing Payment</ion-label>
+        <ion-input type="text" hidden formControlName="payid" [(ngModel)]="pay.payid"></ion-input>
+        <ion-item color="secondary" *ngIf="isCreditCard"> {{terms}} :
+          ****** {{pay.cnum.substring(pay.cnum.length-4,pay.cnum.length)}}
+        </ion-item>
+       <ion-item *ngIf="isCreditCard">
+        <ion-label stacked color="primary">CEEV</ion-label>
+         <ion-input type="text" placeholder="ceev" formControlName="ceev" [(ngModel)]="ceev" ></ion-input>
+         <ion-input type="text" hidden formControlName="termsid" [(ngModel)]="termsid"></ion-input>
+       </ion-item>
+       <ion-item *ngIf="!isCreditCard">
+         <ion-label>{{terms}}</ion-label>
+         <ion-input type="text" hidden formControlName="termsid" [(ngModel)]="termsid"></ion-input>
+       </ion-item>
+       <ion-item>
+       <ion-label  color="primary">Shipping Type</ion-label>
+  <ion-select [(ngModel)]="shiptypeid" formControlName="shiptypeid" (ionChange)="shiptypeChange($event)">
+    <ion-option value="5" selected="true">Ground</ion-option>
+    <ion-option value="4">3 Day</ion-option>
+    <ion-option value="3">2 Day</ion-option>
+    <ion-option value="2">Standard Overnight</ion-option>
+    <ion-option value="1">Priority Overnight</ion-option>
+    <ion-option value="10">Saturday</ion-option>
+  </ion-select>
+       </ion-item>
+     </ion-list>
+     
+    <ion-list *ngIf="total">
+     <ion-item >
+      Sub total:${{total}}
+    </ion-item>
+    <ion-item >
+      Tax: ${{tax}}
+    </ion-item>
+    <ion-item>
+      Shipping:${{shipvalue}}
+    </ion-item>
+    <ion-item>
+      Total:${{gtotal}}
+    </ion-item>
+    </ion-list>
+    <div>
+    <button full ion-button color="block" color="primary" (click)="processOrder()" [disabled]="!addressForm.valid">Order</button>
+  </div>
+     </ion-card-content>
+  </ion-card>
+   
+ </form>
+
+</ion-content>

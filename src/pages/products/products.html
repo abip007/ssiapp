@@ -1,0 +1,72 @@
+<!--
+  Generated template for the Subcategory page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>ServerSupply</ion-title>
+    
+  </ion-navbar>
+</ion-header>
+
+
+<!--<ion-content>
+ 
+        <ion-list>
+        <ion-item *ngFor="let item of Products" text-wrap (click)="goProductDetails($event, item)">
+         <ion-card>
+        <ion-card-content>
+            <ion-row>
+                <ion-col width-25>
+                  <p>{{item.pnum}}</p>
+                    <p><img src="https://www.serversupply.com/images/item/131150.jpg"/></p>
+                 </ion-col>
+                <ion-col  width-75>
+                  
+                      
+                   <p > {{item.description}} </p>
+                   <p color="primary">${{item.price}}</p>
+                   
+                    
+                </ion-col>
+                
+            </ion-row>
+       </ion-card-content>
+          </ion-card>
+        </ion-item>
+    </ion-list>
+     
+</ion-content>-->
+<ion-content>
+    
+  <ion-searchbar placeholder="Search"
+                       [(ngModel)]="queryText"
+                        (ionInput)="updateProducts()">
+        </ion-searchbar>
+   <ion-list [virtualScroll]="Products">
+      <ion-item *ngIf=!oProducts>
+          <h2>{{errorMessage}}</h2>
+        </ion-item>
+    <ion-list-header>
+      Products
+    </ion-list-header>
+    <a ion-item *virtualItem="let prod" text-wrap (click)="goProductDetails($event, prod)">
+        <ion-thumbnail item-left>
+          <!--<img [src]="prod.images[0]" *ngIf="prod.images[0]">-->
+          <img src="https://www.serversupply.com/images/item/131150.jpg"/>
+        </ion-thumbnail>
+        <h2>{{prod.pnum}}</h2>
+        <p [innerHTML]="prod.description"></p>
+        <p color="primary">${{prod.price}}</p>
+    </a>
+    
+       
+    
+  </ion-list>
+  
+</ion-content>

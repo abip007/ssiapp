@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Shipping Address</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+ <form [formGroup]="addressForm">
+  <ion-list>
+     <ion-item>
+        <ion-label>Company Name</ion-label>
+        <ion-input type="text" formControlName="sco" [(ngModel)]="sco"></ion-input>
+     </ion-item>
+     
+     <ion-item>
+        <ion-label>Attention</ion-label>
+        <ion-input type="text" formControlName="Sname" [(ngModel)]="Sname"></ion-input>
+     </ion-item>
+     
+     <ion-item>
+        <ion-label>City</ion-label>
+        <ion-input type="text" formControlName="scity" [(ngModel)]="scity"></ion-input>
+     </ion-item>
+     
+     <ion-item>
+        <ion-label>State</ion-label>
+        <ion-input type="text" formControlName="sstate" [(ngModel)]="sstate"></ion-input>
+     </ion-item>
+     
+     <ion-item>
+        <ion-label>Zipcode</ion-label>
+        <ion-input type="text" formControlName="zipcode" (change)="getZipcode($event)" [(ngModel)]="zipcode" ></ion-input>
+     </ion-item>
+     
+     <ion-item>
+        <ion-label>Address</ion-label>
+        <ion-input type="text" formControlName="Sadd1" [(ngModel)]="Sadd1"></ion-input>
+     </ion-item>
+     
+     <ion-item>
+        <ion-label>Address2</ion-label>
+        <ion-input type="text" formControlName="Sadd2" [(ngModel)]="Sadd2"></ion-input>
+     </ion-item>
+    
+    
+  </ion-list>
+  
+  <div>
+    <button full ion-button color="block" (click)="processOrder()" [disabled]="!addressForm.valid">Next</button>
+  </div>
+ </form>
+ 
+</ion-content>
